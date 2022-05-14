@@ -83,7 +83,7 @@ Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
 仕事では Swift / PHP、Flutter は個人開発で使用<br>
 個人アプリ「医療費を管理して賢く節税」をリリースしています！
 
-<img src="/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
 
 ---
 
@@ -211,7 +211,7 @@ p.box {
 
 # CI 導入のデメリット
 
-<img src="/images/bug.png" class="rounded shadow absolute top-5 right-5" width="290" >
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/bug.png" class="rounded shadow absolute top-5 right-5" width="290" >
 
 <br>
 
@@ -267,7 +267,7 @@ layout: section
 <br>
 <br>
 
-<img src="/images/github-actions.png" class="rounded shadow" width="" >
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-actions.png" class="rounded shadow" width="" >
 
 ---
 
@@ -390,7 +390,7 @@ layout: section
 <div>
 
 <center>
-<img src="images/struct.png" class="rounded shadow" width="180">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/struct.png" class="rounded shadow" width="180">
 </center>
 
 </div>
@@ -413,7 +413,7 @@ name: Flutter CI Basic
 <div>
 
 <center>
-<img src="images/workflow-name.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/workflow-name.png" class="rounded shadow">
 </center>
 
 </div>
@@ -576,7 +576,7 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 🙅 フォーマットしていない
 <br>
 <br>
-<img src="images/format-on-save-no-format.png" class="rounded shadow" width="">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-no-format.png" class="rounded shadow" width="">
 </center>
 
 </div>
@@ -586,7 +586,7 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 ✅ フォーマットしている
 <br>
 <br>
-<img src="images/format-on-save-yes-format.png" class="rounded shadow" width="">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-yes-format.png" class="rounded shadow" width="">
 </center>
 
 </div>
@@ -615,7 +615,7 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 </div>
 <div>
 
-<img src="images/linter.png" class="rounded shadow" width="">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/linter.png" class="rounded shadow" width="">
 
 </div>
 </div>
@@ -661,7 +661,7 @@ void main() {
 ファイル名はなんでも構いません。
 
 <center>
-  <img src="images/workflow-files.png" class="rounded shadow" width="480">
+  <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/workflow-files.png" class="rounded shadow" width="480">
 </center>
 
 ---
@@ -680,7 +680,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 
 <center>
 <video controls="controls" width="700">
-<source src="/movies/run-basic.mov">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/run-basic.mov">
 </video>
 </center>
 
@@ -726,7 +726,7 @@ flowchart LR
 <br>
 
 <center>
-  <img src="images/test-report-sample.png" class="rounded shadow" width="500">
+  <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/test-report-sample.png" class="rounded shadow" width="500">
 </center>
 
 ---
@@ -767,7 +767,7 @@ flowchart LR
 
 </div>
 <div>
-<img src="images/permissions.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/permissions.png" class="rounded shadow">
 
 - 注意点
   - ワークフローが複数あると、別のワークフローに表示されることがあるようです 😅
@@ -790,7 +790,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 https://github.com/susatthi/github-search/runs/6402045178?check_suite_focus=true
 
 <center>
-<img src="images/test-report-sample.png" class="rounded shadow" width="600">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/test-report-sample.png" class="rounded shadow" width="600">
 </center>
 
 ---
@@ -810,7 +810,7 @@ layout: section
 - Codecov を利用します
 
 <center>
-<img src="images/codecov.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov.png" class="rounded shadow">
 </center>
 ---
 
@@ -846,12 +846,12 @@ flowchart LR
 <div grid="~ cols-2 gap-4">
 <div>
 
-<img src="images/codecov-overview-1.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-overview-1.png" class="rounded shadow">
 
 </div>
 <div>
 
-<img src="images/codecov-overview-2.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-overview-2.png" class="rounded shadow">
 
 </div>
 </div>
@@ -894,7 +894,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 https://app.codecov.io/gh/susatthi/github-search
 
 <center>
-<img src="images/codecov-overview-sample.png" class="rounded shadow" width="600">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-overview-sample.png" class="rounded shadow" width="600">
 </center>
 
 ---
@@ -904,7 +904,7 @@ https://app.codecov.io/gh/susatthi/github-search
 https://github.com/susatthi/github-search/pull/113
 
 <center>
-<img src="images/codecov-pr.png" class="rounded shadow" width="600">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-pr.png" class="rounded shadow" width="600">
 </center>
 
 ---
@@ -914,7 +914,7 @@ https://github.com/susatthi/github-search/pull/113
 https://github.com/susatthi/github-search
 
 <center>
-<img src="images/codecov-readme.png" class="rounded shadow" width="600">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-readme.png" class="rounded shadow" width="600">
 </center>
 
 ---
@@ -958,7 +958,7 @@ flowchart LR
 <img class="absolute top-32 left-180" src="/images/square.png" width="160" />
 
 <center>
-<img src="images/slack-sample.png" class="rounded shadow" width="360">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/slack-sample.png" class="rounded shadow" width="360">
 </center>
 
 ---
@@ -969,7 +969,7 @@ flowchart LR
 
 <center>
 <video controls="controls" width="650">
-<source src="/movies/incoming-webhooks.mp4">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/incoming-webhooks.mp4">
 </video>
 </center>
 
@@ -980,7 +980,7 @@ flowchart LR
 - Webhook URL を GitHub Secrets に SLACK_WEBHOOK_URL という名前で登録する
 
 <center>
-<img src="images/github-secrets.png" class="rounded shadow" width="550">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-secrets.png" class="rounded shadow" width="550">
 </center>
 
 ---
@@ -1047,7 +1047,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 https://flutteruniv.slack.com/archives/C037LFDNF39/p1652342741852409
 
 <center>
-<img src="images/slack-sample.png" class="rounded shadow" width="450">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/slack-sample.png" class="rounded shadow" width="450">
 </center>
 
 ---
@@ -1243,7 +1243,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 https://github.com/susatthi/flutter-sample-ci/actions/runs/2318359074
 
 <center>
-<img src="images/android-build.png" class="rounded shadow" width="800">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/android-build.png" class="rounded shadow" width="800">
 </center>
 
 ---
@@ -1443,7 +1443,7 @@ GitHub Secrets に下記を登録する
 
 <center>
 <video controls="controls" width="600">
-<source src="/movies/xcode.mp4">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/xcode.mp4">
 </video>
 </center>
 
@@ -1462,7 +1462,7 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 https://github.com/susatthi/flutter-sample-ci/actions/runs/2318359077
 
 <center>
-<img src="images/ios-build.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/ios-build.png" class="rounded shadow">
 </center>
 
 ---
@@ -1478,7 +1478,7 @@ layout: section
 https://github.com/susatthi/github-search/actions/runs/2311927219
 
 <center>
-<img src="images/github-search.png" class="rounded shadow" width="480">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-search.png" class="rounded shadow" width="480">
 </center>
 
 ---
@@ -1487,7 +1487,7 @@ https://github.com/susatthi/github-search/actions/runs/2311927219
 https://github.com/susatthi/roggle/actions/runs/2298012766
 
 <center>
-<img src="images/roggle-test.png" class="rounded shadow" width="660">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/roggle-test.png" class="rounded shadow" width="660">
 </center>
 
 ---
@@ -1505,12 +1505,12 @@ layout: section
 <div grid="~ cols-2 gap-4">
 <div>
 
-<img src="images/format-on-save.png" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save.png" class="rounded shadow">
 
 </div>
 <div>
 
-<img src="images/android-studio-format.gif" class="rounded shadow">
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/android-studio-format.gif" class="rounded shadow">
 
 </div>
 </div>
@@ -1523,7 +1523,7 @@ Push 前にローカルでテストをしますが、毎回コマンド打つの
 
 <center>
 <video controls="controls" width="630">
-<source src="/movies/local-test.mp4">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/local-test.mp4">
 </video>
 </center>
 
@@ -1574,7 +1574,7 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 顧客にもよります、特に受託開発になると顧客都合の度合いが増えるので顕著。例えば致命的なバグが出ると、緊急対応で原因調査と修正、テスト（修正確認テスト、影響範囲テスト）、リリース、顧客へ報告、再発防止策の提示、、、と、修正以外にやることが増えてしまいます。バグは早期発見・早期改修にこしたことはありません。
 
 <center>
-<img src="/images/bug.png" class="rounded shadow" width="360" >
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/bug.png" class="rounded shadow" width="360" >
 
 [バグの早期検出メリットとその方法｜インスペクションのすすめ](https://shiftasia.com/ja/column/%E3%83%90%E3%82%B0%E3%81%AE%E6%97%A9%E6%9C%9F%E6%A4%9C%E5%87%BA%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%81%9D%E3%81%AE%E6%96%B9%E6%B3%95/)
 
