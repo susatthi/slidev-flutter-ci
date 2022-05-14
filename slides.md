@@ -35,6 +35,40 @@ p {
 
 ---
 
+# もくじ
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+- はじめに
+
+- CI
+  - CI とは何か？
+  - CI 導入のメリットとデメリット
+  - CI の導入方法
+
+- GitHub Actions
+  - GitHub Actions とは
+  - YAML とは
+  - ワークフローの構成と定義方法
+  - 実例
+
+</div>
+<div>
+
+- Tips
+
+- コラム
+
+</div>
+</div>
+
+<div class="absolute bottom-10 right-5">
+  <p>発表時間 50 分（質疑 10 分）</p>
+</div>
+
+---
+
 # 自己紹介
 
 <img src="https://pbs.twimg.com/profile_images/3229257541/0f3a5a42716a230e07619abc86d67b8d_400x400.png" class="rounded shadow absolute  top-10 right-10" width="160" >
@@ -44,10 +78,10 @@ p {
   - Twitter: [@susatthi](https://twitter.com/susatthi)
   - GitHub: [@susatthi](https://github.com/susatthi)
 
-都内在住 ２児のパパ兼フリーランスエンジニア（５年目）エンジニア歴 17 年、自動化大好きマン<br>
-仕事では Swift / PHP / AWS、
+都内在住 ２児のパパ兼フリーランスエンジニア（５年目）、自動化大好きマン<br>
 Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
-Flutter で個人アプリ「医療費を管理して賢く節税」をリリースしています！
+仕事では Swift / PHP、Flutter は個人開発で使用<br>
+個人アプリ「医療費を管理して賢く節税」をリリースしています！
 
 <img src="/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
 
@@ -111,12 +145,54 @@ layout: section
 
 ---
 
-# CI 導入のメリット
+# CI の位置づけ
 
 <br>
 
+## リリースサイクル
+
+<div grid="~ cols-5 gap-2">
+
+<p class="box" style="background-color: #42a5f5;">要件定義</p>
+<p class="box" style="background-color: #2196f3;">UI / UX デザイン</p>
+<p class="box" style="background-color: #1e88e5;">コーディング</p>
+<p class="box" style="background-color: #1976d2;">テスト</p>
+<p class="box" style="background-color: #1565c0;">リリース</p>
+
+</div>
+
+<div grid="~ cols-4 gap-2">
+
+<p></p>
+<p></p>
+<p class="box" style="background-color: #ff8f00;">CI</p>
+<p></p>
+
+</div>
+
+<style>
+p.box {
+  color: white;
+  height: 100px;
+  text-align: center;
+  padding-top: 34px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+}
+</style>
+
+<div class="absolute bottom-5">
+  <p>CI は初学者が今すぐ身につけるべきことではありません。</p>
+  <p>しかし、その必要性は理解し、いつでも始められる準備をしておくことは大事だと思います。</p>
+</div>
+
+---
+
+# CI 導入のメリット
+
 - デグレードを防ぐことができる
 - バグを早期に発見できる
+- コードレビューしやすくなる
 
 ## デグレード（デグレ）とは？
 
@@ -188,9 +264,10 @@ layout: section
   2． アプリをビルドして自動でデプロイする ( CD )<br>
   3． 結果を Slack に通知する<br>
 
-<center>
+<br>
+<br>
+
 <img src="/images/github-actions.png" class="rounded shadow" width="" >
-</center>
 
 ---
 
@@ -302,6 +379,13 @@ layout: section
 <arrow x1="340" y1="200" x2="610" y2="160" color="red" width="4" />
 <arrow x1="220" y1="330" x2="610" y2="330" color="red" width="4" />
 
+<div class="absolute bottom-5">
+  <p>
+    <a href="https://docs.github.com/ja/actions/using-workflows/workflow-syntax-for-github-actions">GitHub Actionsのワークフロー構文</a>
+  </p>
+</div>
+
+
 </div>
 <div>
 
@@ -399,10 +483,10 @@ flowchart LR
 
 |||
 |--|--|
-|単体テスト|関数レベルで期待値と実際の値を比較するテスト|
-|Widget テスト|Widget を操作（タップなど）するテスト|
-|ゴールデンテスト|事前に正解のスクリーンショットを生成しておき、実際のスクリーンショットと比較をするテスト|
-|インテグレーションテスト|擬似的なユーザ ( Driver ) を使って実際の操作をシミュレートするテスト|
+|単体テスト|関数の戻り値が期待値と一致するかを確認するテスト|
+|Widget テスト|Widget を操作（タップなど）して意図した動きをするか確認するテスト|
+|ゴールデンテスト|事前に正解のスクリーンショットを生成しておき、実際の画面イメージと比較をするテスト|
+|インテグレーションテスト|Driver と呼ばれる擬似的なユーザを使って実際の操作をシミュレートするテスト|
 
 ---
 
@@ -424,6 +508,8 @@ jobs:
     steps:
       ・・・
 ```
+
+timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは実行時間に応じて課金されます。処理が終わらないまま放置され莫大な請求額につながらないよう timeout-minutes は必ず指定しましょう。
 
 ---
 
@@ -458,10 +544,16 @@ jobs:
 </div>
 <div>
 
-- 毎回 OS 再起動した状態からスタートするイメージ
-- fvm 利用を前提
-- subosito/flutter-action@v2 によって Flutter SDK バージョンが固定されるので、これ以降のコマンドは `fvm flutter` ではなく `flutter` で問題ない
+- ジョブ毎に OS を起動し直している
 
+- fvm とは Flutter SDK のバージョン管理ツール
+  - SDK バージョンをチームで統一できるほか、SDK のバージョンがあがったときにワークフロー定義ファイルを修正しなくてすむ
+
+- subosito/flutter-action@v2 によって SDK バージョンが固定されるので、これ以降のコマンドは `fvm flutter` ではなく `flutter` で問題ない
+
+- uses で他の人が作った便利なアクションを再利用できる
+
+- `${{ }}` でコンテキスト（変数）を参照、[色々な変数が用意されている](https://docs.github.com/ja/actions/learn-github-actions/contexts)
 </div>
 </div>
 
@@ -514,12 +606,16 @@ jobs:
         run: flutter analyze
 ```
 
-- 標準の [lints](https://pub.dev/packages/lints) パッケージでもよいし、より厳しくしたければ [pedantic_mono](https://pub.dev/packages/pedantic_mono) がオススメ
+- 静的解析のメリット
+  - コーディングスタイルをチームで統一でき、コードレビューがより有益なものになる
+  - キレイなコードが書けるようになる
+
+- デフォルトの [lints](https://pub.dev/packages/lints) パッケージでもよいし、より厳しくしたければ [pedantic_mono](https://pub.dev/packages/pedantic_mono) がオススメ
 
 </div>
 <div>
 
-<img src="images/linter.png" class="rounded shadow absolute top-5 right-5" width="400">
+<img src="images/linter.png" class="rounded shadow" width="">
 
 </div>
 </div>
@@ -534,23 +630,23 @@ jobs:
         run: flutter test
 ```
 
-↓ Widgets テストの例
+Widgets テストの例
 
 ```dart
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('カウンターが増えるはず', (WidgetTester tester) async {
+    // アプリを起動する
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
+    // 初期表示時は 0 になっているはず
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
+    // +ボタン押下する
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
+    // カウンターが 1 になっているはず
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
@@ -599,7 +695,7 @@ layout: section
 
 # テスト結果を GitHub Actions 上に表示する
 
-GitHub 上で実行したテストの結果を確認するには、わざわざ実行ログを見る必要があります。ささっと確認ができるようにするためにテスト結果を GitHub Actions 上に表示するようにしましょう。
+GitHub Actions 上で実行したテストの結果を確認するには、わざわざ実行ログを見る必要があります。ささっと確認ができるようにするためにテスト結果を GitHub Actions 上に表示するようにしましょう。
 
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
@@ -656,6 +752,9 @@ flowchart LR
           reporter: flutter-json
 ```
 
+- `if: ${{ <expression> }}` で if 文のようなことができる ( if の `${{ }}` は省略可 )
+- `always()` はもともと用意されているもので常に `true` を返す
+- ほかにも [いろいろ](https://docs.github.com/ja/actions/learn-github-actions/expressions) あります
 ---
 
 # GitHub の設定を変更する
@@ -955,9 +1054,18 @@ https://flutteruniv.slack.com/archives/C037LFDNF39/p1652342741852409
 
 ここまでできると CI として十分機能していると思います。
 
-テストはすぐに準備出来ないのでテストなしで始めるのも全然ありです。まずは始めてみるのが大切です。
+でも、テストを書くのはだるそうですよね。
 
-ここから先のリリースビルドジョブはぶっちゃけ無くても大丈夫ですが、CD (継続的デリバリー) をやる場合には必須になります。
+特に途中からテストを書きはじめるのは本当にだるいです。テストを書くのはものすごく心理的ハードルが高いです。
+
+でも、いつでもテスト始められる環境を整えておけば、そのハードルが少し下がると思います。
+
+ぜひ、出来るところから CI を導入してみてはいかがでしょうか？
+
+<br>
+<br>
+
+ここから先のリリースビルドジョブはぶっちゃけ導入しなくてもよいですが、CD (継続的デリバリー) をやる場合には必須になりますので参考にしてください。
 
 ---
 layout: section
@@ -1427,12 +1535,12 @@ layout: section
 
 ---
 
-# 2000年代の CI
+# 2000 年代の CI
 
 ## Git 以前の CVS / SVN ( 集中管理方式 ) 全盛期
 
 - GitHub が登場する以前は会社内に SVN / VCS をインストールしたバージョン管理サーバを運用
-- Jenkins をインストールしたサーバに CI を構築
+- [Jenkins](https://cloudbees.techmatrix.jp/jenkins/) をインストールしたサーバに CI を構築
 
 <center>
 
@@ -1442,15 +1550,31 @@ https://www.dcom-web.co.jp/technology/jenkins/
 
 </center>
 
+---
+
+# お金を掛けずに iOS ビルドをする方法
+
+## Jenkins を使うという選択肢
+
+Private リポジトリの場合、Linux (Android) の 10 倍の利用料金がかかるので、利用を躊躇しちゃいます。
+
+- 使わなくなった Mac などに Jenkins をインストール
+- Jenkins にリリースビルドと自動デプロイを構築
+
+
+<div class="absolute bottom-10">
+  <p>Xcode のアップデートとか、証明書やプロビジョニングファイルの管理が面倒なので正直オススメはしません。</p>
+  <p>ですが、多くの Private リポジトリがある場合、コスト面で有利になる可能性があります。</p>
+</div>
 
 ---
 
 # バグは後工程になるほど工数がかかる
 
-顧客にもよるが特に受託開発になると顧客都合の度合いが増えるので顕著。市場バグが出ると、緊急対応で原因調査と修正、テスト（修正確認、影響範囲テスト）、リリース、報告、再発防止策、、、と、修正以外にやることが増えてしまいます。バグは早期発見早期改修に超したことはありません。
+顧客にもよります、特に受託開発になると顧客都合の度合いが増えるので顕著。例えば致命的なバグが出ると、緊急対応で原因調査と修正、テスト（修正確認テスト、影響範囲テスト）、リリース、顧客へ報告、再発防止策の提示、、、と、修正以外にやることが増えてしまいます。バグは早期発見・早期改修にこしたことはありません。
 
 <center>
-<img src="/images/bug.png" class="rounded shadow" width="380" >
+<img src="/images/bug.png" class="rounded shadow" width="360" >
 
 [バグの早期検出メリットとその方法｜インスペクションのすすめ](https://shiftasia.com/ja/column/%E3%83%90%E3%82%B0%E3%81%AE%E6%97%A9%E6%9C%9F%E6%A4%9C%E5%87%BA%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%81%9D%E3%81%AE%E6%96%B9%E6%B3%95/)
 
