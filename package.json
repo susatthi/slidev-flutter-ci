@@ -2,7 +2,7 @@
   "name": "slidev-github-actions",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "slidev build --base /slidev-github-actions/",
     "dev": "slidev --open",
     "export": "slidev export"
   },
