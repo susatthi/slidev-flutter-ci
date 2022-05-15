@@ -8,7 +8,7 @@ fonts:
 
 <div class="absolute top-10">
   <span class="font-700">
-    2022/5/18 すさ
+    2022/5/18 すさ @Flutter 大学勉強会
   </span>
 </div>
 
@@ -50,7 +50,8 @@ p {
 - GitHub Actions
   - GitHub Actions とは
   - YAML とは
-  - ワークフローの構成と定義方法
+  - ワークフローの構成
+  - ワークフローの定義方法
   - 実例
 
 </div>
@@ -136,7 +137,7 @@ layout: section
 
 <br>
 
-## **自動テスト**をして品質を維持しながら開発をすること。
+## **自動テスト**をしてアプリの品質を維持しながら開発をすること。
 
 <div class="absolute bottom-10">
   <p>今回 CD (継続的デリバリー) は扱いません。</p>
@@ -161,11 +162,11 @@ layout: section
 
 </div>
 
-<div grid="~ cols-4 gap-2">
+<div grid="~ cols-4 gap-10" m="-t-4">
 
 <p></p>
 <p></p>
-<p class="box" style="background-color: #ff8f00;">CI</p>
+<p class="box" style="background-color: #ff8f00; height: 50px; padding-top: 16px;">CI</p>
 <p></p>
 
 </div>
@@ -192,7 +193,7 @@ p.box {
 
 - デグレードを防ぐことができる
 - バグを早期に発見できる
-- コードレビューしやすくなる
+- コードレビューの時間が短くなる
 
 ## デグレード（デグレ）とは？
 
@@ -546,12 +547,12 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 
 - ジョブ毎に OS を起動し直している
 
+- uses で他の人が作った便利なアクションを再利用できる
+
 - fvm とは Flutter SDK のバージョン管理ツール
   - SDK バージョンをチームで統一できるほか、SDK のバージョンがあがったときにワークフロー定義ファイルを修正しなくてすむ
 
 - subosito/flutter-action@v2 によって SDK バージョンが固定されるので、これ以降のコマンドは `fvm flutter` ではなく `flutter` で問題ない
-
-- uses で他の人が作った便利なアクションを再利用できる
 
 - `${{ }}` でコンテキスト（変数）を参照、[色々な変数が用意されている](https://docs.github.com/ja/actions/learn-github-actions/contexts)
 </div>
@@ -607,8 +608,8 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 ```
 
 - 静的解析のメリット
-  - コーディングスタイルをチームで統一でき、コードレビューがより有益なものになる
-  - キレイなコードが書けるようになる
+  - コーディングスタイルをチームで統一できるためコーディングスタイルの指摘がなくなりコードレビューがより有益なものになる
+  - 単純にキレイなコードが書けるようになる
 
 - デフォルトの [lints](https://pub.dev/packages/lints) パッケージでもよいし、より厳しくしたければ [pedantic_mono](https://pub.dev/packages/pedantic_mono) がオススメ
 
@@ -616,6 +617,12 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 <div>
 
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/linter.png" class="rounded shadow" width="">
+
+<br>
+
+<center>
+  <i>静的解析の例</i>
+</center>
 
 </div>
 </div>
@@ -719,10 +726,6 @@ flowchart LR
     class NotifySlack reportJob;
 ```
 
-<square width="200" height="200" />
-
-<img class="absolute top-31 left-162" src="/images/square.png" width="180" />
-    
 <br>
 
 <center>
@@ -807,7 +810,7 @@ layout: section
 
 - コード全体のうちテストしたルートが占める割合のこと
 
-- Codecov を利用します
+- [Codecov](https://about.codecov.io/) を利用します
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov.png" class="rounded shadow">
@@ -840,8 +843,6 @@ flowchart LR
     class BuildAndroid,BuildiOS buildJob;
     class NotifySlack reportJob;
 ```
-
-<img class="absolute top-31 left-170" src="/images/square.png" width="170" />
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -895,6 +896,16 @@ https://app.codecov.io/gh/susatthi/github-search
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-overview-sample.png" class="rounded shadow" width="600">
+</center>
+
+---
+
+# Codecov で網羅していない箇所が確認できます 🎉
+
+https://app.codecov.io/gh/susatthi/github-search/blob/d734c1378c8a46ad0496e66a1c9ff409c5f753cd/lib/presentation/components/common/cached_circle_avatar.dart
+
+<center>
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov-diff.png" class="rounded shadow" width="800">
 </center>
 
 ---
@@ -954,8 +965,6 @@ flowchart LR
     class BuildAndroid,BuildiOS buildJob;
     class NotifySlack reportJob;
 ```
-
-<img class="absolute top-32 left-180" src="/images/square.png" width="160" />
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/slack-sample.png" class="rounded shadow" width="360">
@@ -1105,8 +1114,6 @@ flowchart LR
     class BuildAndroid,BuildiOS buildJob;
     class NotifySlack reportJob;
 ```
-
-<img class="absolute top-22 left-153" src="/images/square.png" width="130" />
 
 <br>
 
@@ -1286,8 +1293,6 @@ flowchart LR
     class BuildAndroid,BuildiOS buildJob;
     class NotifySlack reportJob;
 ```
-
-<img class="absolute top-46 left-158" src="/images/square.png" width="80" />
 
 - Android ビルドジョブと並列に行うことができる
 
@@ -1519,13 +1524,34 @@ layout: section
 
 # ローカルテストを楽にしよう
 
-Push 前にローカルでテストをしますが、毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を使って静的解析＋テストを楽に実行できるようにしましょう。
+Push 前にローカルでテストをしますが、毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を使って静的解析＋テスト＋カバレッジ表示を楽に実行できるようにしましょう。
 
 <center>
 <video controls="controls" width="630">
 <source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/local-test.mp4">
 </video>
 </center>
+
+---
+
+# 参考になるかもしれないリファレンスアプリ
+
+## https://github.com/susatthi/github-search
+
+自分なりの最適なアーキテクチャを確立し、リファレンスコードにすることを目的に現在も作成中です。よければ参考に（アンチパターンとしても）して頂ければうれしいです。『#個人開発_すさ_github_search』 で開発の様子を垂れ流していますのでぜひ。
+
+#### 技術スタック
+
+[flutter_riverpod](https://pub.dev/packages/flutter_riverpod), [state_notifier](https://pub.dev/packages/state_notifier), [freezed](https://pub.dev/packages/freezed), [go_router](https://pub.dev/packages/go_router), Sliver, [hive](https://pub.dev/packages/hive) を使ったデータ永続化, 無限スクロール, [http](https://pub.dev/packages/http) を使った REST API の実装, [fast_i18n](https://pub.dev/packages/fast_i18n) を使った多言語対応（日本語/英語）, カスタムフォント対応, [mockito](https://pub.dev/packages/mockito) を使った Unit / Widget テスト, [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) を使ったアプリアイコン, [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) を使ったスプラッシュ画面, [GitHub Actions](https://github.co.jp/features/actions) による自動テストと自動ビルド, マルチプラットフォーム対応 ( iOS / Android / Web / macOS / Windows ), Flutter 3.0.0
+
+#### 今後対応予定
+
+Integration テスト, テーマ対応, ダークモード対応, よりよい UI / UX
+
+#### 対応しないこと
+
+Firebase, Flavor
+
 
 ---
 layout: section
@@ -1582,10 +1608,36 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 
 ---
 
+# さいごに
+
+<br>
+
+『明日から導入できるFlutter CI 入門』ということで
+
+- CI の必要性、メリット、デメリット
+- GitHub Actions で CI を構築する方法
+
+を説明してきました。
+
+<br>
+
+それぞれの事情もあると思うのですぐの構築ができないとしても、少なくとも CI の必要性は理解しておき、いざというときに構築できるようにしておくことは大事だと思います。
+
+<br>
+
+今回の勉強会が少しでもお役にたれれば幸いです。
+
+<p class="absolute right-10">
+おわり
+</p>
+
+---
+
 # 参考サイト
 
-- [github-search](https://github.com/susatthi/github-search) （現在作成中のリファレンスアプリ）
-- [flutter-sample-ci](https://github.com/susatthi/flutter-sample-ci) (今回作成のサンプルアプリ)
+- [susatthi/github-search](https://github.com/susatthi/github-search) （現在作成中のリファレンスアプリ）
+- [susatthi/flutter-sample-ci](https://github.com/susatthi/flutter-sample-ci) (今回作成のサンプルアプリ)
 - [CI(継続的インテグレーション)とは？](https://cloudbees.techmatrix.jp/devops/ci/)
 - [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
+- [【Flutter】GitHubActionsでテストと静的解析を自動化する](https://qiita.com/tokkun5552/items/2eb6793501c152dabf33)
 
