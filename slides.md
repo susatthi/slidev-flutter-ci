@@ -1,5 +1,7 @@
 ---
 theme: apple-basic
+title: '明日から構築できる Flutter CI 入門'
+download: true
 layout: intro-image
 image: 'https://i.pinimg.com/564x/35/5d/d8/355dd88362d2b72ff4f84b3041b516a4.jpg'
 fonts:
@@ -41,11 +43,11 @@ p {
 
 すさ
 
-Twitter: [@susatthi](https://twitter.com/susatthi) / GitHub: [@susatthi](https://github.com/susatthi) / #times_すさ / #個人開発_すさ_github_search
+Twitter: [@susatthi](https://twitter.com/susatthi) / GitHub: [@susatthi](https://github.com/susatthi) / #times_すさ
 
 都内在住 ２児のパパ兼フリーランスエンジニア（５年目）、自動化大好きマン<br>
-Flutter大学 2020年7月〜、 Flutter 歴は約 2 年<br>
-最近の仕事は Swift / PHP、個人開発で Flutter を使っています<br>
+Flutter大学 2020年7月〜、 Flutter 歴は約 2 年、<br>
+最近の仕事は Swift / PHP、個人開発で Flutter を使っています。<br>
 個人アプリ「医療費を管理して賢く節税」をリリースしています！
 
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
@@ -83,11 +85,9 @@ Flutter大学 2020年7月〜、 Flutter 歴は約 2 年<br>
 
 - さいごに
 
-</div>
-</div>
+発表時間 55 分（質疑 5 分）
 
-<div class="absolute bottom-10 right-10">
-  <p>発表時間 55 分（質疑 5 分）</p>
+</div>
 </div>
 
 ---
@@ -222,7 +222,7 @@ layout: section
 
 <center>
 <p>
-lint ルール: <a href="https://dart-lang.github.io/linter/lints/sort_constructors_first.html">sort_constructors_first</a>
+linter rule: <a href="https://dart-lang.github.io/linter/lints/sort_constructors_first.html">sort_constructors_first</a>
 </p>
 </center>
 
@@ -269,8 +269,6 @@ linter:
 
 # Widget テストの例
 
-テストコードを実装して、test フォルダ配下に `*_test.dart` というファイル名で保存し、 `flutter test` を実行することでテストができます。
-
 ```dart
 void main() {
   testWidgets('カウンターが増えるはず', (WidgetTester tester) async {
@@ -291,6 +289,8 @@ void main() {
   });
 }
 ```
+
+テストコードを実装して、test フォルダ配下に `*_test.dart` というファイル名で保存し、 `flutter test` を実行することでテストができます。
 
 --- 
 
@@ -416,7 +416,7 @@ layout: section
 
 # YAML とは
 
-- 設定ファイルの記述によく使用される言語
+- 設定ファイルの記述によく使用されるフォーマット
 
 - YAML Ain't a Markup Language ( YAML はマークアップ言語ではない) の略 😂
 
@@ -476,7 +476,7 @@ branches:
 branches: [main, develop]
 ```
 
-コレクション(名前付き配列)
+マッピング(連想配列)
 
 ```yaml
 flutter_test:
@@ -872,11 +872,9 @@ layout: section
 
 # カバレッジとは？
 
-- テストの網羅率
+テストの網羅率のことです。<br>
 
-- コード全体のうちテストしたルートが占める割合のこと
-
-- [Codecov](https://about.codecov.io/) を利用します
+具体的には、ソースコード全体のルートのうちテスト済みのルートが何パーセントなのかを示します。[Codecov](https://about.codecov.io/) というサービスを利用します。
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/codecov.png" class="rounded shadow">
@@ -1508,7 +1506,7 @@ GitHub Secrets に下記を登録します。
 XCodeを開いて、Runnerを選択して、Signing & Capabilities の Siging の Automatically manage signing のチェックを外し、Provisioning Profile を適切に設定します。
 
 <center>
-<video controls="controls" width="600">
+<video controls="controls" width="620">
 <source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/xcode.mp4">
 </video>
 </center>
@@ -1566,7 +1564,7 @@ layout: section
 
 # ローカルテストを楽にしよう
 
-Push 前にローカルでテストをしますが、毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するシェルスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を作って、静的解析＋テスト＋カバレッジ表示を楽に実行できるようにしてみました。
+Push 前にローカルでテストをするとき毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するシェルスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を作って、静的解析＋テスト＋カバレッジ表示を楽に実行できるようにしてみました。
 
 <center>
 <video controls="controls" width="630">
@@ -1648,6 +1646,8 @@ https://www.dcom-web.co.jp/technology/jenkins/
 
 ソースコードをクラウド上で管理する流れでできつつある中、[Bitbucket](https://bitbucket.org/) はプライベートリポジトリも無料で使えたことから人気がありました。しかし、GitHub が Microsoft に買収され、2019年01月にプライベートリポジトリが無料化されてから一気に GitHub へユーザーが流れた印象です。CI も老舗の CI / CD サービスである [CircleCI](https://circleci.com/ja/) が主流でしたが、今では GitHub Actions が主流になりつつあります。
 
+<br>
+
 2008年04月　[GitHub サービス開始](https://ja.wikipedia.org/wiki/GitHub)<br>
 2018年06月　[Microsoft が GitHub を買収](https://atmarkit.itmedia.co.jp/ait/articles/1806/05/news109.html)<br>
 2019年01月　[GitHub、無料ユーザーでもプライベートリポジトリの利用を可能に](https://cloud.watch.impress.co.jp/docs/news/1163595.html)<br>
@@ -1686,6 +1686,16 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 
 ---
 
+# 参考サイト
+
+- [susatthi/github-search](https://github.com/susatthi/github-search) (現在作成中のリファレンスアプリ)
+- [susatthi/flutter-sample-ci](https://github.com/susatthi/flutter-sample-ci) (今回作成のサンプルアプリ)
+- [CI(継続的インテグレーション)とは？](https://cloudbees.techmatrix.jp/devops/ci/)
+- [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
+- [【Flutter】GitHubActionsでテストと静的解析を自動化する](https://qiita.com/tokkun5552/items/2eb6793501c152dabf33)
+
+---
+
 # さいごに
 
 <br>
@@ -1709,13 +1719,4 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 おわり
 </p>
 
----
-
-# 参考サイト
-
-- [susatthi/github-search](https://github.com/susatthi/github-search) (現在作成中のリファレンスアプリ)
-- [susatthi/flutter-sample-ci](https://github.com/susatthi/flutter-sample-ci) (今回作成のサンプルアプリ)
-- [CI(継続的インテグレーション)とは？](https://cloudbees.techmatrix.jp/devops/ci/)
-- [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
-- [【Flutter】GitHubActionsでテストと静的解析を自動化する](https://qiita.com/tokkun5552/items/2eb6793501c152dabf33)
 
