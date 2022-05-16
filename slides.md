@@ -8,12 +8,12 @@ fonts:
 
 <div class="absolute top-10">
   <span class="font-700">
-    2022/5/18 すさ @Flutter 大学勉強会
+    2022/5/18 すさ ＠Flutter大学勉強会
   </span>
 </div>
 
 <div class="absolute bottom-10">
-  <h1>明日から導入できる<br>Flutter CI 入門</h1>
+  <h1>明日から構築できる<br>Flutter CI 入門</h1>
   <p>GitHub Actions で CI を構築する方法を徹底解説</p>
 </div>
 
@@ -25,13 +25,30 @@ layout: statement
 
 <br>
 
-CI の必要性を理解して明日導入できるようになる
+CI の必要性を理解して明日から構築できるようになる
 
 <style>
 p {
   font-size: 30px;
 }
 </style>
+
+---
+
+# 自己紹介
+
+<img src="https://pbs.twimg.com/profile_images/3229257541/0f3a5a42716a230e07619abc86d67b8d_400x400.png" class="rounded shadow absolute  bottom-10 right-10" width="160" >
+
+すさ
+
+Twitter: [@susatthi](https://twitter.com/susatthi) / GitHub: [@susatthi](https://github.com/susatthi) / #times_すさ / #個人開発_すさ_github_search
+
+都内在住 ２児のパパ兼フリーランスエンジニア（５年目）、自動化大好きマン<br>
+Flutter大学 2020年7月〜、 Flutter 歴は約 2 年<br>
+最近の仕事は Swift / PHP、個人開発で Flutter を使っています<br>
+個人アプリ「医療費を管理して賢く節税」をリリースしています！
+
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
 
 ---
 
@@ -44,8 +61,9 @@ p {
 
 - CI
   - CI とは何か？
+  - CI の位置づけ
   - CI 導入のメリットとデメリット
-  - CI の導入方法
+  - CI の構築方法
 
 - GitHub Actions
   - GitHub Actions とは
@@ -58,33 +76,19 @@ p {
 <div>
 
 - Tips
+  - ローカルテストを楽にしよう
+  - リファレンスアプリの紹介
 
 - コラム
 
+- さいごに
+
 </div>
 </div>
 
-<div class="absolute bottom-10 right-5">
-  <p>発表時間 50 分（質疑 10 分）</p>
+<div class="absolute bottom-10 right-10">
+  <p>発表時間 55 分（質疑 5 分）</p>
 </div>
-
----
-
-# 自己紹介
-
-<img src="https://pbs.twimg.com/profile_images/3229257541/0f3a5a42716a230e07619abc86d67b8d_400x400.png" class="rounded shadow absolute  top-10 right-10" width="160" >
-
-- すさ
-
-  - Twitter: [@susatthi](https://twitter.com/susatthi)
-  - GitHub: [@susatthi](https://github.com/susatthi)
-
-都内在住 ２児のパパ兼フリーランスエンジニア（５年目）、自動化大好きマン<br>
-Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
-仕事では Swift / PHP、Flutter は個人開発で使用<br>
-個人アプリ「医療費を管理して賢く節税」をリリースしています！
-
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/medical-deduction.png" class="rounded shadow absolute" width="340" >
 
 ---
 
@@ -92,7 +96,7 @@ Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
 
 <br>
 
-あなたはスタートアップの Flutter エンジニアです。
+想像してください。あなたはスタートアップの Flutter エンジニアです。
 
 アプリをリリースして半年が経ちユーザ数も伸びてきたところで次の課題に直面しています。
 
@@ -100,7 +104,7 @@ Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
   - 「バージョンアップしたらアプリが落ちるようになりました😡」
   - 「昨日から通知が来ません😅」
 
-- バグを修正するたびに別のバグが発生して新機能の開発に集中できない
+- バグを修正するたびに別のバグが発生して新機能の開発が進まない
 
 <div class="absolute bottom-10">
   <p>継続してアプリを成長させていくためには品質を維持する必要がありました。</p>
@@ -111,13 +115,13 @@ Flutter 大学は 2020年7月〜、 Flutter 歴は約 2 年<br>
 
 テストシナリオを作って、テスターを雇い、リリース前テストを導入しました。
 
-するとユーザからのバグ報告は減り、新機能の開発に集中できるようになりました。
+するとユーザからのバグ報告は減り、新機能の開発が進むようになりました。
 
 しかし、しばらくするとまた新たな課題が見つかります。
 
-- アプリが成長するほどリリース前テストのボリュームが大きくなり工数が増えてきた
+- アプリが成長するにつれリリース前テストが増えて工数が増えてきた
 - リリース毎にほぼ同じテストをしている
-- リリース間隔が延びるとバグの発見が遅れる
+- リリース前にしかテストをしないのでバグの発見が遅い
 
 <div class="absolute bottom-10">
   <p>解決策を調べていると "CI" というものを導入するとよさそうなのでもっと調べてみることにしました。</p>
@@ -137,14 +141,158 @@ layout: section
 
 <br>
 
-## **自動テスト**をしてアプリの品質を維持しながら開発をすること。
+## 短いサイクルで自動テストをして品質を維持しながら開発をすること
+
+ここで言う『テスト』とは次の 3 つのことを指しています。
+
+① コードフォーマット
+
+② 静的解析
+
+③ テスト
 
 <div class="absolute bottom-10">
-  <p>今回 CD (継続的デリバリー) は扱いません。</p>
+  <p>なお、今回 CD (継続的デリバリー) は扱いません。</p>
   <p>CD とは、自動的にデプロイやストア配信をしていち早くユーザにプロダクトを届けることです。</p>
 </div>
 
 ---
+
+# ① コードフォーマット
+
+ソースコードが見やすく整形されているかをチェック・修正することです。
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+<center>
+❌ フォーマットしていないコード
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-no-format.png" class="rounded shadow" width="">
+</center>
+
+</div>
+<div>
+
+<center>
+✅ フォーマットしているコード
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-yes-format.png" class="rounded shadow" width="">
+</center>
+
+</div>
+</div>
+
+---
+
+# Format on Save を有効にしよう
+
+保存時に自動でフォーマットしてくれるので、自分でコードの整形に時間をかけずにすみ、またコードレビューで余計な指摘をされずにすみます。
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/android-studio-format.gif" class="rounded shadow">
+
+</div>
+<div>
+
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save.png" class="rounded shadow">
+
+</div>
+</div>
+
+---
+
+# ② 静的解析
+
+公式が推奨するコーディングスタイルに従っているか解析することです。
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/analyze-ide.png" class="rounded shadow">
+
+</div>
+<div>
+
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/analyze-rule.png" class="rounded shadow">
+
+<center>
+<p>
+lint ルール: <a href="https://dart-lang.github.io/linter/lints/sort_constructors_first.html">sort_constructors_first</a>
+</p>
+</center>
+
+</div>
+</div>
+
+---
+
+# 静的解析を導入しよう
+
+ルールを書いた analysis_options.yaml をプロジェクトルートに置いておくと、IDE が自動で解析して指摘してくれます。
+コーディングスタイルをチームで統一できるとコードレビューで余計な指摘をされずにすみます。あと単純にキレイなコードが書けるようになります。
+
+デフォルトで入っている [lints](https://pub.dev/packages/lints) パッケージでもよいし、より厳しくしたければ [pedantic_mono](https://pub.dev/packages/pedantic_mono) がオススメです。
+
+
+私は pedantic_mono を導入した上で次のカスタマイズをして利用しています。
+
+
+```yaml
+include: package:pedantic_mono/analysis_options.yaml
+
+linter:
+  rules:
+    avoid_classes_with_only_static_members: false
+    constant_identifier_names: true
+    prefer_relative_imports: true
+```
+*analysis_options.yaml*
+---
+
+# ③ テスト
+
+いろいろな種類のテストがあります。
+
+|||
+|--|--|
+|単体テスト|関数の戻り値が期待値と一致するかを確認するテスト|
+|Widget テスト|Widget を操作（タップなど）して意図した動きをするか確認するテスト|
+|ゴールデンテスト|事前に正解のスクリーンショットを生成しておき、実際の画面イメージと比較をするテスト|
+|インテグレーションテスト|Driver と呼ばれる擬似的なユーザを使って実際の操作をシミュレートするテスト|
+
+---
+
+# Widget テストの例
+
+テストコードを実装して、test フォルダ配下に `*_test.dart` というファイル名で保存し、 `flutter test` を実行することでテストができます。
+
+```dart
+void main() {
+  testWidgets('カウンターが増えるはず', (WidgetTester tester) async {
+    // アプリを起動する
+    await tester.pumpWidget(const MyApp());
+
+    // 初期表示時は 0 になっているはず
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // +ボタン押下する
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // カウンターが 1 になっているはず
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+```
+
+--- 
 
 # CI の位置づけ
 
@@ -155,7 +303,7 @@ layout: section
 <div grid="~ cols-5 gap-2">
 
 <p class="box" style="background-color: #42a5f5;">要件定義</p>
-<p class="box" style="background-color: #2196f3;">UI / UX デザイン</p>
+<p class="box" style="background-color: #2196f3;">デザイン</p>
 <p class="box" style="background-color: #1e88e5;">コーディング</p>
 <p class="box" style="background-color: #1976d2;">テスト</p>
 <p class="box" style="background-color: #1565c0;">リリース</p>
@@ -191,47 +339,45 @@ p.box {
 
 # CI 導入のメリット
 
-- デグレードを防ぐことができる
-- バグを早期に発見できる
-- コードレビューの時間が短くなる
+<br>
 
-## デグレード（デグレ）とは？
+## ✅ コードレビューの時間が短くなる
 
-既存機能がバグること。
+コードレビュー前にテストを通しておけば、コードレビューの時点である程度の品質が担保されています。
 
-- デグレードの例
+## ✅ バグを早期に発見できる
 
-  - 新機能を実装したら既存機能が動かなくなった
-  - SDK をバージョンアップしたらビルドが通らなくなった
+自動化により短いサイクルでテストができるため、バグを早期に発見することができます。
 
-- デグレがいかにヤバいかがわかる記事
+## ✅ デグレードを防ぐことができる
 
-  - [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
+デグレード（デグレ）とは、新機能を実装したり SDK やパッケージをアップデートしたことによって今まで正常に動いていた既存機能が動かなくなることです。
+
+[デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
 
 ---
 
 # CI 導入のデメリット
 
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/bug.png" class="rounded shadow absolute top-5 right-5" width="290" >
+<br>
+
+## ❌ 学習コスト
+
+新しいことをするには学習コストがかかりますが、多くの情報が転がっていますし、ものすごく難易度が高いことでもありません。
 
 <br>
 
-- 学習コスト
+## ❌ 開発時の工数が増える
 
-- 開発時の工数が増える
-  - 開発時に自動テストを実装する工数が増える
-    - バグを早期に発見することで削減できる工数もあるが（※）、総じて工数は増える
-    - [バグの早期検出メリットとその方法｜インスペクションのすすめ](https://shiftasia.com/ja/column/%E3%83%90%E3%82%B0%E3%81%AE%E6%97%A9%E6%9C%9F%E6%A4%9C%E5%87%BA%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%81%9D%E3%81%AE%E6%96%B9%E6%B3%95/)
-
-  - 後述するコードフォーマットや静的解析は実装が不要ですぐに導入が可能！（すぐにやろう！）
+コードフォーマットと静的解析は実装が不要ですぐに構築が可能ですが、テストはテストコードを実装する工数が（かなり）増えます。
 
 ---
 
-# CI の導入方法
+# CI の構築方法
 
 <br>
 
-## Flutter をサポートしている CI / CD サービスを利用する
+## Flutter をサポートしている CI / CD サービスを利用します
 
 - Travis CI
 - Circle CI
@@ -240,9 +386,6 @@ p.box {
 - **GitHub Actions**
 
 <div class="absolute bottom-10">
-  <p>
-    このようなサービスが無い時代 (スマホが登場する前まで) は、自前でサーバーをたてて Jenkins インストールして環境構築して、、、ディスク容量がいっぱいになったら外付けHDDとりつけて、、、、しばらく運用するとHDDがピーピーなって故障したりと苦労が絶えませんでした。本当に楽になりました。
-  </p>
   <p>今回は Public リポジトリなら完全無料の GitHub Actions をつかってみます！</p>
 </div>
 
@@ -257,18 +400,17 @@ layout: section
 # GitHub Actions とは
 
 リモートレポジトリにコードをアップロードしたらワークフローを実行する仕組みです。<br>
-ワークフローは YAML と呼ばれる設定ファイルで定義します。
+ワークフローは YAML と呼ばれる設定ファイルに定義します。
 
-- よくあるワークフロー
+【よくあるワークフロー】
 
-  1． 自動テストを実施 ( CI )<br>
-  2． アプリをビルドして自動でデプロイする ( CD )<br>
-  3． 結果を Slack に通知する<br>
+1． 自動テストを実施する<br>
+2． 自動テストが OK ならビルドして自動デプロイする<br>
+3． 結果を Slack に通知する<br>
 
 <br>
-<br>
 
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-actions.png" class="rounded shadow" width="" >
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-actions.png" class="rounded shadow" >
 
 ---
 
@@ -357,7 +499,7 @@ layout: section
 
 ---
 
-# ワークフローの定義ファイルの構成
+# ワークフローの構成
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -374,7 +516,7 @@ layout: section
 - ジョブ ( jobs: )
 
   - 実行環境 (OS) や処理手順など
-  - ジョブは複数定義でき、**各ジョブはそれぞれ別々の環境で実行される**
+  - ジョブは複数定義でき、**各ジョブはそれぞれ別々の環境で実行されます**
 
 <arrow x1="300" y1="160" x2="610" y2="110" color="red" width="4" />
 <arrow x1="340" y1="200" x2="610" y2="160" color="red" width="4" />
@@ -447,11 +589,10 @@ on:
 </div>
 <div>
 
-- オススメのワークフローの起動条件
+【オススメのワークフローの起動条件】
 
-  - プルリクエストが作成された時
-  - プルリクエストが更新された時
-  - main ブランチに push された時
+- プルリクエストが作成 or 更新された時
+- main ブランチに push された時
 
 
 </div>
@@ -459,16 +600,15 @@ on:
 
 ---
 
-# テストジョブの定義
+# ジョブの定義
 
-次の簡単なテストジョブを定義してみます。
+次のテストジョブを定義してみます。
 
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     end
@@ -480,18 +620,9 @@ flowchart LR
     class Prepare,Format,Analyze,Test testJob;
 ```
 
-テストには色々な種類のテストがあります。すべて GitHub Actions 上で実行できます（多分）。
-
-|||
-|--|--|
-|単体テスト|関数の戻り値が期待値と一致するかを確認するテスト|
-|Widget テスト|Widget を操作（タップなど）して意図した動きをするか確認するテスト|
-|ゴールデンテスト|事前に正解のスクリーンショットを生成しておき、実際の画面イメージと比較をするテスト|
-|インテグレーションテスト|Driver と呼ばれる擬似的なユーザを使って実際の操作をシミュレートするテスト|
-
 ---
 
-# テストジョブの定義
+# 実行環境の定義
 
 ```yaml
 # ジョブを定義する
@@ -514,7 +645,7 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 
 ---
 
-# STEP: 準備
+# STEP: テスト前の準備
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -545,16 +676,15 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
 </div>
 <div>
 
-- ジョブ毎に OS を起動し直している
+- uses で他の人が作った便利なアクションを再利用できます。https://github.com/actions/checkout
 
-- uses で他の人が作った便利なアクションを再利用できる
+- `${{ }}` でコンテキスト（変数）を参照できます。[色々なコンテキストが用意されています。](https://docs.github.com/ja/actions/learn-github-actions/contexts)
 
 - fvm とは Flutter SDK のバージョン管理ツール
-  - SDK バージョンをチームで統一できるほか、SDK のバージョンがあがったときにワークフロー定義ファイルを修正しなくてすむ
+  - SDK バージョンをチームで統一できるほか、SDK のバージョンがあがったときにワークフロー定義ファイルを修正しなくてすみます。
 
-- subosito/flutter-action@v2 によって SDK バージョンが固定されるので、これ以降のコマンドは `fvm flutter` ではなく `flutter` で問題ない
+- subosito/flutter-action@v2 によって SDK バージョンが固定されるので、`fvm flutter` ではなく `flutter` で問題ありません。
 
-- `${{ }}` でコンテキスト（変数）を参照、[色々な変数が用意されている](https://docs.github.com/ja/actions/learn-github-actions/contexts)
 </div>
 </div>
 
@@ -568,64 +698,16 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
       - name: Run Flutter format
         run: flutter format --set-exit-if-changed .
 ```
-<br>
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-<center>
-🙅 フォーマットしていない
-<br>
-<br>
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-no-format.png" class="rounded shadow" width="">
-</center>
-
-</div>
-<div>
-
-<center>
-✅ フォーマットしている
-<br>
-<br>
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save-yes-format.png" class="rounded shadow" width="">
-</center>
-
-</div>
-</div>
-
 
 ---
 
 # STEP: 静的解析
-
-<div grid="~ cols-2 gap-4">
-<div>
 
 ```yaml
       # 静的解析を実行
       - name: Run Flutter Analyze
         run: flutter analyze
 ```
-
-- 静的解析のメリット
-  - コーディングスタイルをチームで統一できるためコーディングスタイルの指摘がなくなりコードレビューがより有益なものになる
-  - 単純にキレイなコードが書けるようになる
-
-- デフォルトの [lints](https://pub.dev/packages/lints) パッケージでもよいし、より厳しくしたければ [pedantic_mono](https://pub.dev/packages/pedantic_mono) がオススメ
-
-</div>
-<div>
-
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/linter.png" class="rounded shadow" width="">
-
-<br>
-
-<center>
-  <i>静的解析の例</i>
-</center>
-
-</div>
-</div>
 
 ---
 
@@ -637,35 +719,12 @@ timeout-minutes のデフォルト値は 6 時間！ Private リポジトリは�
         run: flutter test
 ```
 
-Widgets テストの例
-
-```dart
-void main() {
-  testWidgets('カウンターが増えるはず', (WidgetTester tester) async {
-    // アプリを起動する
-    await tester.pumpWidget(const MyApp());
-
-    // 初期表示時は 0 になっているはず
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // +ボタン押下する
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // カウンターが 1 になっているはず
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
-}
-```
-
 ---
 
-# ワークフローの定義ファイルを保存する
+# 定義ファイルを保存する
 
-作成した YAML ファイルを .github/workflows/ に保存します。<br>
-ファイル名はなんでも構いません。
+YAML で作成した定義ファイルを .github/workflows/ に保存します。<br>
+ファイル名はなんでも構いませんし、複数のワークフローファイルを保存しておくこともできます。
 
 <center>
   <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/workflow-files.png" class="rounded shadow" width="480">
@@ -683,10 +742,10 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 
 # ワークフローを動かしてみよう
 
-準備が出来ました。さっそく修正を Commit & Push して、プルリクエストを作成してみましょう。ワークフローが起動しました 🎉
+準備が出来ました。修正を Commit & Push して、プルリクエストを作成してみましょう。
 
 <center>
-<video controls="controls" width="700">
+<video controls="controls" width="740">
 <source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/run-basic.mov">
 </video>
 </center>
@@ -696,20 +755,19 @@ https://github.com/susatthi/flutter-sample-ci/blob/main/.github/workflows/flutte
 layout: section
 ---
 
-# テスト結果を GitHub Actions 上に表示する
+# テスト結果を表示してみよう
 
 ---
 
-# テスト結果を GitHub Actions 上に表示する
+# テスト結果を表示してみよう
 
-GitHub Actions 上で実行したテストの結果を確認するには、わざわざ実行ログを見る必要があります。ささっと確認ができるようにするためにテスト結果を GitHub Actions 上に表示するようにしましょう。
+GitHub Actions 上で実行したテストの結果を確認するには、わざわざ実行ログを見る必要があります。ささっと確認したいのでテスト結果を GitHub Actions 上に表示してみましょう。
 
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     Test --> Report(テスト結果を表示)
@@ -734,9 +792,10 @@ flowchart LR
 
 ---
 
-# STEP: テスト＆テスト結果を表示する
+# テストジョブを修正
 
-「STEP: 静的解析」までは同じです。
+<div grid="~ cols-2 gap-4">
+<div>
 
 ```yaml {2,4,6-}
       # テストを実行
@@ -755,9 +814,16 @@ flowchart LR
           reporter: flutter-json
 ```
 
-- `if: ${{ <expression> }}` で if 文のようなことができる ( if の `${{ }}` は省略可 )
-- `always()` はもともと用意されているもので常に `true` を返す
-- ほかにも [いろいろ](https://docs.github.com/ja/actions/learn-github-actions/expressions) あります
+</div>
+<div>
+
+- `if: ${{ <expression> }}` で if 文のようなことができます ( if の `${{ }}` は省略可 )。
+- `always()` はもともと用意されているもので常に `true` を返します。
+- ほかにも [いろいろ](https://docs.github.com/ja/actions/learn-github-actions/expressions) あります。
+
+</div>
+</div>
+
 ---
 
 # GitHub の設定を変更する
@@ -800,7 +866,7 @@ https://github.com/susatthi/github-search/runs/6402045178?check_suite_focus=true
 layout: section
 ---
 
-# テストカバレッジを測定しよう
+# テストカバレッジを測定してみよう
 
 ---
 
@@ -817,16 +883,15 @@ layout: section
 </center>
 ---
 
-# テストカバレッジを測定しよう
+# テストカバレッジを測定してみよう
 
-カバレッジを可視化して網羅率を上げることは品質向上に役立ちます。カバレッジを測定するサービスである Codecov に結果を送信し、Codecov のサイト上でカバレッジの結果を見られるようにしましょう。
+カバレッジを可視化して網羅率を上げることは品質向上に役立ちます。カバレッジを測定するサービスである Codecov に結果を送信し、Codecov のサイト上でカバレッジの結果を見られるようにしてみましょう。
 
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     Test --> Report(テスト結果を表示)
@@ -859,7 +924,7 @@ flowchart LR
 
 ---
 
-# STEP: Codecovに結果を送信
+# テストジョブを修正
 
 ```yaml {3,5,9-}
       # テストを実行
@@ -932,20 +997,19 @@ https://github.com/susatthi/github-search
 layout: section
 ---
 
-# CI の結果を Slack に通知しよう
+# CI の結果を Slack に通知してみよう
 
 ---
 
-# CI の結果を Slack に通知しよう
+# CI の結果を Slack に通知してみよう
 
-テストで失敗したときはいち早く知りたいですよね。いつも使っている Slack に結果を通知できればうれしいです。やってみましょう！
+テストで失敗したときはいち早く知りたいですよね。いつも使っている Slack に結果を通知できればうれしいのでやってみましょう。
 
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     Test --> Report(テスト結果を表示)
@@ -968,28 +1032,6 @@ flowchart LR
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/slack-sample.png" class="rounded shadow" width="360">
-</center>
-
----
-
-# Slack の準備
-
-- Incoming Webhooks アプリを Slack に追加し Webhook URL を取得する
-
-<center>
-<video controls="controls" width="650">
-<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/incoming-webhooks.mp4">
-</video>
-</center>
-
----
-
-# GitHub の準備
-
-- Webhook URL を GitHub Secrets に SLACK_WEBHOOK_URL という名前で登録する
-
-<center>
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-secrets.png" class="rounded shadow" width="550">
 </center>
 
 ---
@@ -1044,6 +1086,28 @@ flowchart LR
 
 ---
 
+# Slack の準備
+
+Incoming Webhooks アプリを Slack に追加し Webhook URL を取得します。
+
+<center>
+<video controls="controls" width="650">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/incoming-webhooks.mp4">
+</video>
+</center>
+
+---
+
+# GitHub の準備
+
+Webhook URL を GitHub Secrets に SLACK_WEBHOOK_URL という名前で登録しておきます。
+
+<center>
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/github-secrets.png" class="rounded shadow" width="550">
+</center>
+
+---
+
 # 完成したワークフロー
 
 <br>
@@ -1065,16 +1129,16 @@ https://flutteruniv.slack.com/archives/C037LFDNF39/p1652342741852409
 
 でも、テストを書くのはだるそうですよね。
 
-特に途中からテストを書きはじめるのは本当にだるいです。テストを書くのはものすごく心理的ハードルが高いです。
+テストを書くのはものすごく心理的ハードルが高く、特に途中からテストを書きはじめるのは本当にだるいです。
 
-でも、いつでもテスト始められる環境を整えておけば、そのハードルが少し下がると思います。
+ですので、まずは、単体テストなどのテスト無しで CI を構築しておいて、いつでもテストが始められる環境を整えておけば、そのハードルが少し下がると思います。
 
 ぜひ、出来るところから CI を導入してみてはいかがでしょうか？
 
 <br>
 <br>
 
-ここから先のリリースビルドジョブはぶっちゃけ導入しなくてもよいですが、CD (継続的デリバリー) をやる場合には必須になりますので参考にしてください。
+ここから先の話はぶっちゃけ導入しなくてもよいですが、CD (継続的デリバリー) をやる場合には必須になりますので参考にしてください。
 
 ---
 layout: section
@@ -1089,9 +1153,8 @@ layout: section
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     Test --> Report(テスト結果を表示)
@@ -1117,15 +1180,12 @@ flowchart LR
 
 <br>
 
-- テストの結果は早く知りたいのでビルドよりもテストを優先する
-- ビルドはテストが成功したときのみ実行する
-- もし Android ビルドジョブが失敗したら Slack への通知時にその旨を含める
+- テストの結果は早く知りたいのでテストジョブが成功した後にビルドジョブを実行してみます。
+- もしビルドジョブが失敗したら Slack への通知時にその旨を含めてみましょう。
 
 ---
 
 # Android ビルドジョブを追加
-
-テストジョブと同じような準備が必要。。。CircleCI の commands のように Step をメソッド化できるようになることを期待。
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -1173,6 +1233,8 @@ flowchart LR
       - name: Build for Android
         run: flutter build appbundle -t lib/main.dart --release
 ```
+
+テストジョブと同じような準備が必要。。。CircleCI の commands のように Step をメソッド化できるようになることを期待。
 
 </div>
 </div>
@@ -1266,9 +1328,8 @@ layout: section
 ```mermaid
 %%{init:{'theme':'base','themeVariables':{'primaryColor':'#f0f0f0','primaryTextColor':'#2f2f2f', 'lineColor':'#2f2f2f','textColor':'#2f2f2f','fontSize':'16px','nodeBorder':'0px'}}}%%
 flowchart LR
-    Start((開始)) --> Prepare(準備)
+    Start((開始)) --> Format(コードフォーマット)
     subgraph テストジョブ
-    Prepare --> Format(コードフォーマット)
     Format --> Analyze(静的解析)
     Analyze --> Test(テスト)
     Test --> Report(テスト結果を表示)
@@ -1294,16 +1355,14 @@ flowchart LR
     class NotifySlack reportJob;
 ```
 
-- Android ビルドジョブと並列に行うことができる
+- Android ビルドジョブと並列に実行します。
 
-- Private リポジトリの場合、Linux (Android) の 10 倍の利用料金がかかるので注意 😖
+- Private リポジトリの場合、Linux (Android) の 10 倍の利用料金がかかるので注意が必要です 😖
   - https://docs.github.com/ja/billing/managing-billing-for-github-actions/about-billing-for-github-actions
 
 ---
 
 # iOS ビルドジョブを追加
-
-基本的には Android ビルドジョブの追加と同じ
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -1352,11 +1411,11 @@ flowchart LR
 </div>
 </div>
 
+基本的には Android ビルドジョブと同じです。
+
 ---
 
 # iOS ビルドジョブを追加
-
-iOS はリリースビルド時にプロビジョニングファイルと証明書が必要
 
 ```yaml
       # プロビジョニングファイルの取り込み
@@ -1375,6 +1434,8 @@ iOS はリリースビルド時にプロビジョニングファイルと証明�
       - name: Build for iOS
         run: flutter build ipa -t lib/main.dart --release
 ```
+
+iOS はリリースビルド時にプロビジョニングファイルと証明書が必要です。
 
 ---
 
@@ -1426,7 +1487,7 @@ iOS はリリースビルド時にプロビジョニングファイルと証明�
 # GitHub の設定
 
 <br>
-GitHub Secrets に下記を登録する
+GitHub Secrets に下記を登録します。
 
 |     |     |
 | --- | --- |
@@ -1444,7 +1505,7 @@ GitHub Secrets に下記を登録する
 
 # iOS プロジェクトファイルの修正
 
-- XCodeを開いて、Runnerを選択して、Signing & Capabilities の Siging の Automatically manage signing のチェックを外し、Provisioning Profile を適切に設定する
+XCodeを開いて、Runnerを選択して、Signing & Capabilities の Siging の Automatically manage signing のチェックを外し、Provisioning Profile を適切に設定します。
 
 <center>
 <video controls="controls" width="600">
@@ -1503,28 +1564,9 @@ layout: section
 
 ---
 
-# 保存時自動フォーマットを有効にしよう
-
-コードが見やすくなりコードレビューが楽になりますし、`{ }` や `[ ]` の対応ミスも減ります。
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/format-on-save.png" class="rounded shadow">
-
-</div>
-<div>
-
-<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/android-studio-format.gif" class="rounded shadow">
-
-</div>
-</div>
-
----
-
 # ローカルテストを楽にしよう
 
-Push 前にローカルでテストをしますが、毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を使って静的解析＋テスト＋カバレッジ表示を楽に実行できるようにしましょう。
+Push 前にローカルでテストをしますが、毎回コマンド打つのが面倒です。そこで [ローカルでテストを楽に実行するシェルスクリプト](https://github.com/susatthi/flutter-sample-ci/blob/main/bin/flutter_test) を作って、静的解析＋テスト＋カバレッジ表示を楽に実行できるようにしてみました。
 
 <center>
 <video controls="controls" width="630">
@@ -1534,24 +1576,31 @@ Push 前にローカルでテストをしますが、毎回コマンド打つの
 
 ---
 
-# 参考になるかもしれないリファレンスアプリ
+# リファレンスアプリの紹介
 
 ## https://github.com/susatthi/github-search
 
 自分なりの最適なアーキテクチャを確立し、リファレンスコードにすることを目的に現在も作成中です。よければ参考に（アンチパターンとしても）して頂ければうれしいです。『#個人開発_すさ_github_search』 で開発の様子を垂れ流していますのでぜひ。
 
-#### 技術スタック
+#### 🔥 技術スタック
 
 [flutter_riverpod](https://pub.dev/packages/flutter_riverpod), [state_notifier](https://pub.dev/packages/state_notifier), [freezed](https://pub.dev/packages/freezed), [go_router](https://pub.dev/packages/go_router), Sliver, [hive](https://pub.dev/packages/hive) を使ったデータ永続化, 無限スクロール, [http](https://pub.dev/packages/http) を使った REST API の実装, [fast_i18n](https://pub.dev/packages/fast_i18n) を使った多言語対応（日本語/英語）, カスタムフォント対応, [mockito](https://pub.dev/packages/mockito) を使った Unit / Widget テスト, [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) を使ったアプリアイコン, [flutter_native_splash](https://pub.dev/packages/flutter_native_splash) を使ったスプラッシュ画面, [GitHub Actions](https://github.co.jp/features/actions) による自動テストと自動ビルド, マルチプラットフォーム対応 ( iOS / Android / Web / macOS / Windows ), Flutter 3.0.0
 
-#### 今後対応予定
+#### 🚀 今後対応予定
 
-Integration テスト, テーマ対応, ダークモード対応, よりよい UI / UX
+ゴールデンテスト, インテグレーションテスト, テーマ対応, ダークモード対応, レスポンシブ, よりよい UX （現在対応中）
 
-#### 対応しないこと
+#### 👀 対応しないこと
 
 Firebase, Flavor
 
+---
+
+<center>
+<video controls="controls" width="230">
+<source src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/movies/github-search-demo.mp4">
+</video>
+</center>
 
 ---
 layout: section
@@ -1563,14 +1612,13 @@ layout: section
 
 # 2000 年代の CI
 
-## Git 以前の CVS / SVN ( 集中管理方式 ) 全盛期
+## CVS / Subversion ( 集中管理方式 ) 全盛期
 
-- GitHub が登場する以前は会社内に SVN / VCS をインストールしたバージョン管理サーバを運用
-- [Jenkins](https://cloudbees.techmatrix.jp/jenkins/) をインストールしたサーバに CI を構築
+GitHub が登場する前のソースコード管理は、会社内にソースコード管理ツールの [CVS](https://ja.wikipedia.org/wiki/CVS) や [Subversion](https://ja.wikipedia.org/wiki/Apache_Subversion) をインストールしたサーバを構築・運用していました。GitHub Actions のような CI / CD サービスが無いので、自前で ビルドサーバーも構築し、ビルドに 1 時間以上かかるので cronで 1 日 1回ビルドジョブを動かしてビルドが通ることの確認だけ行っていました。
 
 <center>
 
-<img src="https://www.dcom-web.co.jp/wp-content/uploads/2016/01/img_dcom_Jenkins2.jpg" class="rounded shadow" width="600" />
+<img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/build-system-2000.png" width="560" />
 
 https://www.dcom-web.co.jp/technology/jenkins/
 
@@ -1578,26 +1626,56 @@ https://www.dcom-web.co.jp/technology/jenkins/
 
 ---
 
+# 2010 年代前半の CI
+
+## Git と Jenkins の登場
+
+GitHub はすでに存在していましたが、まだソースコードをクラウドで管理することに抵抗のあった時代でしたので、会社内に [GitLab](https://ja.wikipedia.org/wiki/GitLab) をインストールしたサーバを構築・運用していました。また、開発作業の自動化を目的として作られてたオープンソースの CI / CD ツールである [Jenkins](https://ja.wikipedia.org/wiki/Jenkins) の登場により、CI / CD を自前で簡単に構築することができるようになりました。
+
+<center>
+
+<img src="https://www.dcom-web.co.jp/wp-content/uploads/2016/01/img_dcom_Jenkins2.jpg" width="520" />
+
+https://www.dcom-web.co.jp/technology/jenkins/
+
+</center>
+
+---
+
+# 2010 年代後半以降の CI
+
+## 強すぎる GitHub
+
+ソースコードをクラウド上で管理する流れでできつつある中、[Bitbucket](https://bitbucket.org/) はプライベートリポジトリも無料で使えたことから人気がありました。しかし、GitHub が Microsoft に買収され、2019年01月にプライベートリポジトリが無料化されてから一気に GitHub へユーザーが流れた印象です。CI も老舗の CI / CD サービスである [CircleCI](https://circleci.com/ja/) が主流でしたが、今では GitHub Actions が主流になりつつあります。
+
+2008年04月　[GitHub サービス開始](https://ja.wikipedia.org/wiki/GitHub)<br>
+2018年06月　[Microsoft が GitHub を買収](https://atmarkit.itmedia.co.jp/ait/articles/1806/05/news109.html)<br>
+2019年01月　[GitHub、無料ユーザーでもプライベートリポジトリの利用を可能に](https://cloud.watch.impress.co.jp/docs/news/1163595.html)<br>
+2019年11月　[GitHub Actions 正式リリース](https://japan.zdnet.com/article/35145409/)
+
+---
+
 # お金を掛けずに iOS ビルドをする方法
 
 ## Jenkins を使うという選択肢
 
-Private リポジトリの場合、Linux (Android) の 10 倍の利用料金がかかるので、利用を躊躇しちゃいます。
+Private リポジトリの場合、Linux (Android) の 10 倍の利用料金がかかるので、利用を躊躇しちゃいますよね。そんなときは Jenkins を使えばお金を掛けずに iOS の CI が構築できます。
 
 - 使わなくなった Mac などに Jenkins をインストール
 - Jenkins にリリースビルドと自動デプロイを構築
 
 
 <div class="absolute bottom-10">
-  <p>Xcode のアップデートとか、証明書やプロビジョニングファイルの管理が面倒なので正直オススメはしません。</p>
-  <p>ですが、多くの Private リポジトリがある場合、コスト面で有利になる可能性があります。</p>
+  <p>
+    しかし、、、、Xcode のアップデートとか、証明書やプロビジョニングファイルの管理が面倒なので正直オススメはしません。ですが、多くの Private リポジトリがある場合、コスト面で有利になる可能性があります。
+  </p>
 </div>
 
 ---
 
 # バグは後工程になるほど工数がかかる
 
-顧客にもよります、特に受託開発になると顧客都合の度合いが増えるので顕著。例えば致命的なバグが出ると、緊急対応で原因調査と修正、テスト（修正確認テスト、影響範囲テスト）、リリース、顧客へ報告、再発防止策の提示、、、と、修正以外にやることが増えてしまいます。バグは早期発見・早期改修にこしたことはありません。
+顧客にもよりますが、特に受託開発になると顧客都合の度合いが増えるので顕著です。例えば致命的なバグが出ると、緊急対応で原因調査と修正、テスト（修正確認テスト、影響範囲テスト）、リリース、顧客へ報告、再発防止策の提示、、、と、修正以外にやることが増えてしまいます。バグは早期発見・早期改修にこしたことはありません。
 
 <center>
 <img src="https://raw.githubusercontent.com/susatthi/slidev-github-actions/main/public/images/bug.png" class="rounded shadow" width="360" >
@@ -1612,12 +1690,12 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 
 <br>
 
-『明日から導入できるFlutter CI 入門』ということで
+『明日から構築できる Flutter CI 入門』ということで
 
 - CI の必要性、メリット、デメリット
 - GitHub Actions で CI を構築する方法
 
-を説明してきました。
+を紹介してきました。
 
 <br>
 
@@ -1625,7 +1703,7 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 
 <br>
 
-今回の勉強会が少しでもお役にたれれば幸いです。
+今回の勉強会が共同開発、個人開発、お仕事に少しでもお役にたれれば幸いです。
 
 <p class="absolute right-10">
 おわり
@@ -1635,7 +1713,7 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 
 # 参考サイト
 
-- [susatthi/github-search](https://github.com/susatthi/github-search) （現在作成中のリファレンスアプリ）
+- [susatthi/github-search](https://github.com/susatthi/github-search) (現在作成中のリファレンスアプリ)
 - [susatthi/flutter-sample-ci](https://github.com/susatthi/flutter-sample-ci) (今回作成のサンプルアプリ)
 - [CI(継続的インテグレーション)とは？](https://cloudbees.techmatrix.jp/devops/ci/)
 - [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
