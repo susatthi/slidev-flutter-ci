@@ -1,8 +1,8 @@
 {
-  "name": "slidev-github-actions",
+  "name": "slidev-flutter-ci-getting-started",
   "private": true,
   "scripts": {
-    "build": "slidev build --base /slidev-github-actions/",
+    "build": "slidev build --base /slidev-flutter-ci-getting-started/",
     "dev": "slidev --open",
     "export": "slidev export"
   },
