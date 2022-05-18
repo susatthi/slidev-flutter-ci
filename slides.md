@@ -1710,6 +1710,15 @@ Private リポジトリの場合、Linux (Android) の 10 倍の利用料金が�
 - [デグレをぶちかましたので、開発作業を1週間以上止められた話。](http://ht-jp.net/blog/pc/dev-memo/degrade)
 - [【Flutter】GitHubActionsでテストと静的解析を自動化する](https://qiita.com/tokkun5552/items/2eb6793501c152dabf33)
 
+
+
+<div class="absolute bottom-10">
+  <p>
+    このスライドは <a href="https://github.com/slidevjs/slidev">Slidev</a> で作られています。<br>
+    このスライドの元情報は <a href="https://github.com/susatthi/slidev-flutter-ci">GitHub</a> で管理されています。
+  </p>
+</div>
+
 ---
 
 # さいごに

@@ -12,6 +12,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Export
+        run: npm run export
       - name: Deploy pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
