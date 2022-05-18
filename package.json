@@ -4,7 +4,7 @@
   "scripts": {
     "build": "slidev build --base /slidev-flutter-ci/",
     "dev": "slidev --open",
-    "export": "slidev export --output dist/slides.pdf"
+    "export": "slidev export"
   },
   "dependencies": {
     "@slidev/cli": "^0.31.2",
