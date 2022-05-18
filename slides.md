@@ -27,7 +27,23 @@ layout: statement
 
 <br>
 
-CI の必要性を理解して明日から構築できるようになる
+<v-click>
+
+🌱 CI の必要性を理解する
+
+</v-click>
+
+<v-click>
+
+✨ CI を自力で構築できるようになる
+
+</v-click>
+
+<v-click>
+
+🔥 復習
+
+</v-click>
 
 <style>
 p {
